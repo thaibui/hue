@@ -18,7 +18,7 @@ function fail {
 
 function do_start {
     $SUPERVISORD -c ${PROJECT_HOME}/tools/ops/supervisord.conf && echo "Started supervisord for Hue UI"
-    echo "Raven web service started"
+    echo "Hue started"
 }
 
 function do_stop {
