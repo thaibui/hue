@@ -4,7 +4,6 @@
 
 # Install Maven
 MAVEN_VERSION=3.5.0
-wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
 wget http://apache.mirrors.ionfish.org/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz -O /tmp/apache-maven-$MAVEN_VERSION-bin.tar.gz
 tar -xzvf /tmp/apache-maven-$MAVEN_VERSION-bin.tar.gz -C /opt
 export PATH=/opt/apache-maven-$MAVEN_VERSION/bin:$PATH
