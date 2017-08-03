@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+#
+# /etc/rc.d/init.d/hued
+#
+# chkconfig: 2345 99 15
+# description: Hue Server & UI
+
+. /etc/rc.d/init.d/functions
+. /etc/profile # make sure we are using the intended python
+PROJECT_HOME=/opt/hue
+SUPERVISORD=`which supervisord`
+
+function fail {
+    logger -p error -t hued -i -- $1
+    echo "error: $2"
+    exit 1
+}
+
+function do_start {
+    $SUPERVISORD -c ${PROJECT_HOME}/tools/ops/supervisord.conf && echo "Started supervisord for Hue UI"
+    echo "Raven web service started"
+}
+
+function do_stop {
+    pkill -f "$PROJECT_HOME/tools/ops/supervisord.conf" && echo "Stopped supervisord, waiting for Python server to exit..."
+    HUE_PID=`pgrep -f "/opt/hue/build/env/bin/hue" 2>/dev/null`
+    until [ -z "$HUE_PID" ]; do
+        echo "HUE_PID=$HUE_PID, Waiting..."
+        sleep 2
+        HUE_PID=`pgrep -f "/opt/hue/build/env/bin/hue" 2>/dev/null`
+    done
+    echo "Hue was successfully stopped."
+}
+
+function do_restart {
+    do_stop
+    do_start
+}
+
+function get_status {
+    HUE_PID=`pgrep -f /opt/hue/build/env/bin/hue 2>/dev/null`
+    if [ -z "$HUE_PID" ]; then
+       echo "stopped"
+       return 3
+    else
+       echo "running"
+       return 0
+    fi
+}
+
+case "$1" in
+    start)
+        do_start
+    ;;
+    stop)
+        do_stop
+    ;;
+    restart)
+        do_restart
+    ;;
+    status)
+        get_status
+    ;;
+esac
