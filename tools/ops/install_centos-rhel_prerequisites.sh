@@ -13,3 +13,6 @@ export PATH=/opt/apache-maven-$MAVEN_VERSION/bin:$PATH
 sudo yum -y install ant asciidoc cyrus-sasl-devel cyrus-sasl-gssapi cyrus-sasl-plain gcc gcc-c++ \
     krb5-devel libffi-devel libxml2-devel libxslt-devel make mysql mysql-devel openldap-devel \
     python-devel sqlite-devel gmp-devel openssl-devel supervisor git
+
+# Install supervisord for easy hue process management
+easy_install supervisor
