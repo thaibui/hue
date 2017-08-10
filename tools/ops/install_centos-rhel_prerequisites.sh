@@ -10,4 +10,6 @@ tar -xzvf /tmp/apache-maven-$MAVEN_VERSION-bin.tar.gz -C /opt
 export PATH=/opt/apache-maven-$MAVEN_VERSION/bin:$PATH
 
 # Install all required external packages including supervisor
-sudo yum -y install ant asciidoc cyrus-sasl-devel cyrus-sasl-gssapi cyrus-sasl-plain gcc gcc-c++ krb5-devel libffi-devel libxml2-devel libxslt-devel make mysql mysql-devel openldap-devel python-devel sqlite-devel gmp-devel openssl-devel supervisor
+sudo yum -y install ant asciidoc cyrus-sasl-devel cyrus-sasl-gssapi cyrus-sasl-plain gcc gcc-c++ \
+    krb5-devel libffi-devel libxml2-devel libxslt-devel make mysql mysql-devel openldap-devel \
+    python-devel sqlite-devel gmp-devel openssl-devel supervisor git
