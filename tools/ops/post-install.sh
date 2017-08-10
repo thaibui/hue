@@ -13,3 +13,6 @@ chown -R hue:hue /var/log/hue
 # Add directory for pidfile
 mkdir -p /var/run/hue
 chown -R hue:hue /var/run/hue
+
+# Add hue permissions to hue working directory
+chown -R hue:hue /opt/hue
