@@ -18,3 +18,4 @@ yum -y install ant asciidoc cyrus-sasl-devel cyrus-sasl-gssapi cyrus-sasl-plain 
 easy_install supervisor
 # Configure, require root access
 echo_supervisord_conf > /etc/supervisord.conf
+export PATH=/usr/local/bin:$PATH
