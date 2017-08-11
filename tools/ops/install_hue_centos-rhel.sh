@@ -1,5 +1,7 @@
 #!/bin/bash
 set -e
-git clone https://github.com/thaibui/hue.git /opt/hue
+if [ ! -d "/opt/hue" ]; then
+    git clone https://github.com/thaibui/hue.git /opt/hue
+fi
 cd /opt/hue
 make apps
