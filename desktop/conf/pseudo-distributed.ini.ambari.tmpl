@@ -298,7 +298,7 @@
     #     (New oauth, support Twitter, Facebook, Google+ and Linkedin
     # Multiple Authentication backends are supported by specifying a comma-separated list in order of priority.
     # However, in order to enable OAuthBackend, it must be the ONLY backend configured.
-    ## backend=desktop.auth.backend.AllowFirstUserDjangoBackend
+    backend=desktop.auth.backend.LdapBackend
 
     # Class which defines extra accessor methods for User objects.
     ## user_aug=desktop.auth.backend.DefaultUserAugmentor
@@ -372,7 +372,7 @@
     base_dn="{{ldap-base-dn}}"
 
     # URL of the LDAP server
-    ldap_url=ldap://{{ldap-server}}
+    ldap_url=ldaps://{{ldap-server}}
 
     # The NT domain used for LDAP authentication
     ## nt_domain=mycompany.com
@@ -399,7 +399,7 @@
 
     # Pattern for searching for usernames -- Use <username> for the parameter
     # For use when using LdapBackend for Hue authentication
-    ## ldap_username_pattern="uid=<username>,ou=People,dc=mycompany,dc=com"
+    ldap_username_pattern="uid=<username>,ou=People,{{ldap-base-dn}}"
 
     # Create users in Hue when they try to login with their LDAP credentials
     # For use when using LdapBackend for Hue authentication
@@ -419,7 +419,7 @@
     ## force_username_uppercase=false
 
     # Use search bind authentication.
-    ## search_bind_authentication=true
+    search_bind_authentication=false
 
     # Choose which kind of subgrouping to use: nested or suboordinate (deprecated).
     ## subgroups=suboordinate
