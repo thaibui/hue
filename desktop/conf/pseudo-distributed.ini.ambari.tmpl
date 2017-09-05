@@ -886,7 +886,7 @@
   hive_server_port=10000
 
   # Hive configuration directory, where hive-site.xml is located
-  hive_conf_dir=/Users/thai.bui/projects/hue
+  hive_conf_dir=/etc/hive2/conf
 
   # Timeout in seconds for thrift calls to Hive service
   ## server_conn_timeout=120
@@ -910,7 +910,7 @@
   ## close_queries=false
 
   # Hue will use at most this many HiveServer2 sessions per user at a time.
-  ## max_number_of_sessions=1
+  max_number_of_sessions=3
 
   # Thrift version to use when communicating with HiveServer2.
   # New column format is from version 7.
