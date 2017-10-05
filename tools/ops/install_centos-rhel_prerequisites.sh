@@ -10,7 +10,8 @@ tar -xzvf /tmp/apache-maven-$MAVEN_VERSION-bin.tar.gz -C /opt
 export PATH=/opt/apache-maven-$MAVEN_VERSION/bin:$PATH
 
 # Install all required external packages including supervisor
-yum -y install ant asciidoc cyrus-sasl-devel cyrus-sasl-gssapi cyrus-sasl-plain gcc gcc-c++ \
+# gcc gcc-c++ \ gcc and gcc-++ is no longer needed in the latest image installing it messes up things
+yum -y install ant asciidoc cyrus-sasl-devel cyrus-sasl-gssapi cyrus-sasl-plain \
     krb5-devel libffi-devel libxml2-devel libxslt-devel make mysql mysql-devel openldap-devel \
     python-devel sqlite-devel gmp-devel openssl-devel postgresql-devel supervisor git jq
 
