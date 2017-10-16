@@ -119,6 +119,117 @@
     </plugins>
   </build>
 
+    <profiles>
+        <profile>
+            <id>rpm</id>
+            <activation>
+                <os>
+                    <name>Unix/Linux</name>
+                    <family>unix</family>
+                </os>
+            </activation>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>rpm-maven-plugin</artifactId>
+                        <version>2.1.5</version>
+
+                        <executions>
+                            <execution>
+                                <id>rpm</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>attached-rpm</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+
+                        <configuration>
+                            <group>Applications/System</group>
+                            <license>Other/Proprietary</license>
+                            <targetOS>Linux</targetOS>
+
+                            <mappings>
+                                <mapping>
+                                    <directory>/opt/hue</directory>
+                                    <filemode>644</filemode>
+                                    <username>hue</username>
+                                    <groupname>hue</groupname>
+
+                                    <sources>
+                                        <source>
+                                            <location>/</location>
+                                            <includes>
+                                                <include>*.*</include>
+                                            </includes>
+                                        </source>
+                                    </sources>
+                                </mapping>
+
+                                <mapping>
+                                    <directory>/opt/hue/deploy</directory>
+                                    <filemode>755</filemode>
+                                    <username>hue</username>
+                                    <groupname>hue</groupname>
+
+                                    <sources>
+                                        <source>
+                                            <location>deploy/rpm</location>
+                                            <includes>
+                                                <include>hued</include>
+                                                <include>supervisord.conf</include>
+                                            </includes>
+                                        </source>
+                                    </sources>
+                                </mapping>
+                            </mappings>
+
+                            <preinstallScriptlet>
+                                <scriptFile>deploy/rpm/pre-install.sh</scriptFile>
+                                <fileEncoding>utf-8</fileEncoding>
+                            </preinstallScriptlet>
+
+                            <postinstallScriptlet>
+                                <scriptFile>deploy/rpm/post-install.sh</scriptFile>
+                                <fileEncoding>utf-8</fileEncoding>
+                            </postinstallScriptlet>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>com.bazaarvoice.maven.plugins</groupId>
+                        <artifactId>s3repo-maven-plugin</artifactId>
+                        <version>3.5</version>
+                        <executions>
+                            <execution>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>create-update</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+
+                        <configuration>
+                            <s3RepositoryPath>s3://bdap-private-artifacts/rpm/testhuerpm/1.0</s3RepositoryPath>
+                            <allowCreateRepository>true</allowCreateRepository>
+                            <autoIncrementSnapshotArtifacts>true</autoIncrementSnapshotArtifacts>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>${project.groupId}</groupId>
+                                    <artifactId>${project.artifactId}</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>rpm</type>
+                                    <targetBaseName>${project.artifactId}-${project.version}</targetBaseName>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        
   <dependencyManagement>
     <dependencies>
       <dependency>
