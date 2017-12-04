@@ -64,6 +64,22 @@
   <script src="${ static('desktop/js/hue.errorcatcher.js') }"></script>
   % endif
   <script src="${ static('desktop/js/hue4.utils.js') }"></script>
+  <style>
+      ul.top-secondary-nav li {
+        display: inline-block;
+        padding: 0 15px;
+        margin: 10px 0 0 0;
+      }
+
+      ul.top-secondary-nav a {
+        color: #222;
+      }
+
+      ul.top-secondary-nav a:focus, ul.top-secondary-nav a:hover {
+        font-weight: bold;
+        color: #0B7FAD;
+      }
+  </style>
 </head>
 
 <body>
@@ -103,6 +119,15 @@ ${ hueIcons.symbols() }
       ${ banner_message or conf.CUSTOM.BANNER_TOP_HTML.get() | n,unicode }
     </div>
   % endif
+  <nav class="navbar navbar-default" style="border-bottom: 1px solid #DCDCDC;">
+    <div class="top-nav-left">
+      <ul class="top-secondary-nav" style="padding-left: 100px;">
+        <li><a href="/hue/editor?type=hive">Editor</a></li>
+        <li><a href="/hue/home">Documents</a></li>
+        <li><a href="/hue/metastore/tables">Tables</a></li>
+      </ul>
+    </div>
+  </nav>
   <nav class="navbar navbar-default">
     <div class="navbar-inner top-nav">
       <div class="top-nav-left">
@@ -156,7 +181,6 @@ ${ hueIcons.symbols() }
           </li>
         </script>
       </div>
-
 
       <div class="top-nav-middle">
 
