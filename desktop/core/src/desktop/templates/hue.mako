@@ -63,6 +63,22 @@
   <script src="${ static('desktop/js/hue.errorcatcher.js') }"></script>
   % endif
   <script src="${ static('desktop/js/hue4.utils.js') }"></script>
+  <style>
+      ul.top-secondary-nav li {
+        display: inline-block;
+        padding: 0 15px;
+        margin: 10px 0 0 0;
+      }
+
+      ul.top-secondary-nav a {
+        color: #222;
+      }
+
+      ul.top-secondary-nav a:focus, ul.top-secondary-nav a:hover {
+        font-weight: bold;
+        color: #0B7FAD;
+      }
+  </style>
 </head>
 
 <body>
@@ -102,61 +118,17 @@ ${ hueIcons.symbols() }
       ${ banner_message or conf.CUSTOM.BANNER_TOP_HTML.get() | n,unicode }
     </div>
   % endif
+  <nav class="navbar navbar-default" style="border-bottom: 1px solid #DCDCDC;">
+    <div class="top-nav-left">
+      <ul class="top-secondary-nav" style="padding-left: 100px;">
+        <li><a href="/hue/editor?type=hive">Editor</a></li>
+        <li><a href="/hue/home">Documents</a></li>
+        <li><a href="/hue/metastore/tables">Tables</a></li>
+      </ul>
+    </div>
+  </nav>
   <nav class="navbar navbar-default">
     <div class="navbar-inner top-nav">
-      <div class="top-nav-left">
-        <a class="hamburger hamburger-hue pull-left" data-bind="toggle: leftNavVisible, css: { 'is-active': leftNavVisible }">
-          <span class="hamburger-box"><span class="hamburger-inner"></span></span>
-        </a>
-
-        <a class="brand" data-bind="hueLink: '/home/'" href="javascript: void(0);" title="${_('Documents')}">
-          <svg style="height: 24px; width: 120px;"><use xlink:href="#hi-logo"></use></svg>
-        </a>
-
-
-        <div class="btn-group" data-bind="visible: true" style="display:none; margin-top: 8px">
-          <!-- ko if: mainQuickCreateAction -->
-          <!-- ko with: mainQuickCreateAction -->
-          <a class="btn btn-primary disable-feedback hue-main-create-btn" data-bind="hueLink: url, attr: {title: tooltip}, style: { borderBottomRightRadius: $parent.quickCreateActions().length > 1 ? '0px' : '4px', borderTopRightRadius: $parent.quickCreateActions().length > 1 ? '0px' : '4px' }">
-            <span data-bind="text: displayName"></span>
-          </a>
-          <!-- /ko -->
-          <!-- /ko -->
-          <button class="btn btn-primary dropdown-toggle hue-main-create-btn-dropdown" data-toggle="dropdown" data-bind="visible: quickCreateActions().length > 1">
-            <!-- ko ifnot: mainQuickCreateAction -->${ _('More') } <!-- /ko -->
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu hue-main-create-dropdown" data-bind="foreach: { data: quickCreateActions, as: 'item' }">
-            <!-- ko template: 'quick-create-item-template' --><!-- /ko -->
-          </ul>
-        </div>
-
-        <script type="text/html" id="quick-create-item-template">
-          <!-- ko if: item.dividerAbove -->
-          <li class="divider"></li>
-          <!-- /ko -->
-          <li data-bind="css: { 'dropdown-submenu': item.isCategory }">
-            <!-- ko if: item.url -->
-             <a href="javascript: void(0);" data-bind="hueLink: item.url">
-                <!-- ko if: item.icon -->
-                <!-- ko template: { name: 'app-icon-template', data: item } --><!-- /ko -->
-                <!-- /ko -->
-                <span data-bind="css: { 'dropdown-no-icon': !item.icon }, text: item.displayName"></span>
-              </a>
-            <!-- /ko -->
-            <!-- ko if: item.href -->
-              <a data-bind="attr: { href: item.href }, text: item.displayName" target="_blank"></a>
-            <!-- /ko -->
-            <!-- ko if: item.isCategory -->
-            <ul class="dropdown-menu" data-bind="foreach: { data: item.children, as: 'item' }">
-              <!-- ko template: 'quick-create-item-template' --><!-- /ko -->
-            </ul>
-            <!-- /ko -->
-          </li>
-        </script>
-      </div>
-
-
       <div class="top-nav-middle">
 
         <!-- ko if: cluster.clusters().length > 1 -->
