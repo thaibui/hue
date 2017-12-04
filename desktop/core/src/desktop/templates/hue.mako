@@ -79,6 +79,10 @@
         font-weight: bold;
         color: #0B7FAD;
       }
+
+      .navbar-default {
+        border-top: none !important;
+      }
   </style>
 </head>
 
