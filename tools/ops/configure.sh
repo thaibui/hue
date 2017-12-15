@@ -34,6 +34,10 @@ case $key in
     DB_PASSWORD="$2"
     shift # past argument
     ;;
+    --enable-portal)
+    ENABLE_PORTAL="$2"
+    shift # past argument
+    ;;
     *)
     echo "Unknown option $key"
     exit -1
@@ -78,6 +82,11 @@ if [ -z "$DB_PASSWORD" ]; then
     exit -1
 fi
 
+if [ -z "$ENABLE_PORTAL" ]; then
+    echo "--enable-portal not provided. Default to 'false'"
+    ENABLE_PORTAL=false
+fi
+
 echo "Hue installed dir: $HUE_DIR"
 echo "Master hostname: $MASTER"
 echo "LDAP server: $LDAP_SERVER"
@@ -85,6 +94,7 @@ echo "LDAP base dn: $LDAP_BASE_DN"
 echo "DB host: $DB_HOST"
 echo "DB user: $DB_USER"
 echo "DB password: *****"
+echo "Enable portal: $ENABLE_PORTAL"
 
 echo "Configuring .. $HUE_DIR/desktop/conf/pseudo-distributed.ini"
 cat $HUE_DIR/desktop/conf/pseudo-distributed.ini.ambari.tmpl | \
@@ -95,3 +105,12 @@ cat $HUE_DIR/desktop/conf/pseudo-distributed.ini.ambari.tmpl | \
     sed "s/{{db-user}}/$DB_USER/g" | \
     sed "s/{{db-password}}/$DB_PASSWORD/g" \
     > $HUE_DIR/desktop/conf/pseudo-distributed.ini
+
+if [ "$ENABLE_PORTAL" = true ]; then
+    echo "Enabling Portal functionality for Hue"
+    echo "+++++++++++++++++++++++++++++++++++++"
+    echo "Creating NGINX rerouting policy"
+    unlink /etc/nginx/site_enables/hue.conf || echo "No existing nginx config file found."
+    ln -s $HUE_DIR/tools/ops/hue_nginx.conf /etc/nginx/site_enables/hue.conf 
+    echo "Done creating NGINX rerouting policy"
+fi
