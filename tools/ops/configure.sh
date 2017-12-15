@@ -113,5 +113,6 @@ if [ "$ENABLE_PORTAL" = true ]; then
     NGINX_LOCATION=/etc/nginx/sites-enabled
     unlink $NGINX_LOCATION/hue.conf || echo "No existing nginx config file found."
     ln -s $HUE_DIR/tools/ops/hue_nginx.conf $NGINX_LOCATION/hue.conf 
-    echo "Done creating NGINX rerouting policy"
+    echo "Done creating NGINX rerouting policy. Restarting nginx..."
+    service nginx restart
 fi
