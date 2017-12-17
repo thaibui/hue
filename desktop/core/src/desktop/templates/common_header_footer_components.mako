@@ -296,17 +296,10 @@ from metadata.conf import has_optimizer, OPTIMIZER
         $.ajaxSetup({ cache: false });
       }
 
-      // prevents framebusting and clickjacking
-      if (self == top){
-        $("body").css({
-          'display': 'block',
-          'visibility': 'visible'
-        });
-      }
-      else {
-        // instead of rediecting the browser, redirect within the iframe
-        // so this is not needed
-      }
+      $("body").css({
+        'display': 'block',
+        'visibility': 'visible'
+      });
 
       %if conf.AUTH.IDLE_SESSION_TIMEOUT.get() > -1 and not skip_idle_timeout:
       IDLE_SESSION_TIMEOUT = ${conf.AUTH.IDLE_SESSION_TIMEOUT.get()};
