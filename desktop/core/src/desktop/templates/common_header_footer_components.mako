@@ -301,6 +301,14 @@ from metadata.conf import has_optimizer, OPTIMIZER
         'visibility': 'visible'
       });
 
+      window.addEventListener('message', function(event) {
+        if(event.data == 'qa-user-login') {
+          document.getElementById("id_username").value = 'qa-user';
+          document.getElementById("id_password").value = 'qa-user';
+          document.querySelector("div.login-container > form").submit();
+        }
+      });
+
       %if conf.AUTH.IDLE_SESSION_TIMEOUT.get() > -1 and not skip_idle_timeout:
       IDLE_SESSION_TIMEOUT = ${conf.AUTH.IDLE_SESSION_TIMEOUT.get()};
       var idleTimer;

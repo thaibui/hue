@@ -82,8 +82,8 @@
       .navbar-default {
         border-top: none !important;
       }
-      
-      .top-nav-right .btn-group {
+
+      .top-nav-right {
         display: none;
       }
   </style>
