@@ -271,6 +271,32 @@ class AllowAllBackend(DesktopBackendBase):
     return True
 
 
+class QAUserBackend(DesktopBackendBase):
+  """
+  Only allow 'qa-user' / 'qa-user' to login
+  The users will be added to the 'default_user' group.
+  """
+  def check_auth(self, username, password):
+    _user = 'qa-user'
+    _pass = 'qa-user'
+
+    if username != _user:
+        return None
+
+    user = find_user(username)
+    if user is None:
+      user = create_user(username, _pass)
+      user.is_superuser = False
+      user.save()
+
+    ensure_has_a_group(user)
+
+    return user
+
+  @classmethod
+  def manages_passwords_externally(cls):
+    return True
+
 class DemoBackend(django.contrib.auth.backends.ModelBackend):
   """
   Log automatically users without a session with a new user account.
@@ -589,4 +615,3 @@ class RemoteUserDjangoBackend(django.contrib.auth.backends.RemoteUserBackend):
     user = super(RemoteUserDjangoBackend, self).get_user(user_id)
     user = rewrite_user(user)
     return user
-
