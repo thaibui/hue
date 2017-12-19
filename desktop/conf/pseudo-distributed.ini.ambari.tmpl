@@ -298,7 +298,7 @@
     #     (New oauth, support Twitter, Facebook, Google+ and Linkedin
     # Multiple Authentication backends are supported by specifying a comma-separated list in order of priority.
     # However, in order to enable OAuthBackend, it must be the ONLY backend configured.
-    backend=desktop.auth.backend.QAUserBackend
+    backend=libsaml.backend.SAML2Backend,desktop.auth.backend.QAUserBackend
 
     # Class which defines extra accessor methods for User objects.
     ## user_aug=desktop.auth.backend.DefaultUserAugmentor
@@ -1440,14 +1440,14 @@
 
 [libsaml]
   # Xmlsec1 binary path. This program should be executable by the user running Hue.
-  ## xmlsec_binary=/usr/local/bin/xmlsec1
+  xmlsec_binary=/usr/bin/xmlsec1
 
   # Entity ID for Hue acting as service provider.
   # Can also accept a pattern where '<base_url>' will be replaced with server URL base.
   ## entity_id="<base_url>/saml2/metadata/"
 
   # Create users from SSO on login.
-  ## create_users_on_login=true
+  create_users_on_login=true
 
   # Required attributes to ask for from IdP.
   # This requires a comma separated list.
@@ -1458,13 +1458,13 @@
   ## optional_attributes=
 
   # IdP metadata in the form of a file. This is generally an XML file containing metadata that the Identity Provider generates.
-  ## metadata_file=
+  metadata_file=/opt/hue/desktop/conf/metadata.xml
 
   # Private key to encrypt metadata with.
-  ## key_file=
+  key_file=/opt/hue/desktop/conf/saml.pem
 
   # Signed certificate to send along with encrypted metadata.
-  ## cert_file=
+  cert_file=/opt/hue/desktop/conf/cert.pem
 
   # Path to a file containing the password private key.
   ## key_file_password=/path/key
@@ -1472,8 +1472,8 @@
   # Execute this script to produce the private key password. This will be used when 'key_file_password' is not set.
   ## key_file_password_script=/path/pwd.sh
 
-  # A mapping from attributes in the response from the IdP to django user attributes.
-  ## user_attribute_mapping={'uid': ('username', )}
+  # A mapping from attributes in the response from the IdP to django user attributes
+  user_attribute_mapping='{"uid":"username"}'
 
   # Have Hue initiated authn requests be signed and provide a certificate.
   ## authn_requests_signed=false
@@ -1485,7 +1485,7 @@
   ## username_source=attributes
 
   # Performs the logout or not.
-  ## logout_enabled=true
+  logout_enabled=true
 
 
 ###########################################################################
