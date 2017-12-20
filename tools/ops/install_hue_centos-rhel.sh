@@ -2,6 +2,7 @@
 set -e
 if [ ! -d "/opt/hue" ]; then
     git clone https://github.com/thaibui/hue.git /opt/hue
+    git checkout hue-portal
 fi
 cd /opt/hue
 git pull
