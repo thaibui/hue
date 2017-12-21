@@ -1,10 +1,10 @@
 #!/bin/bash
 set -e
-if [ ! -d "/opt/hue" ]; then
-    git clone https://github.com/thaibui/hue.git /opt/hue
-    git checkout hue-portal
+if [ ! -d "/opt/hue-portal" ]; then
+    git clone https://github.com/thaibui/hue.git /opt/hue-portal
+    git checkout hue-portal-old-vpc
 fi
-cd /opt/hue
+cd /opt/hue-portal
 git pull
 make apps
 

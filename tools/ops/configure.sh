@@ -48,8 +48,8 @@ done
 
 # Get hue install dir
 if [ -z "$HUE_DIR" ]; then
-    echo "Hue install dir not supplied. Default to /opt/hue"
-    HUE_DIR=/opt/hue
+    echo "Hue install dir not supplied. Default to /opt/hue-portal"
+    HUE_DIR=/opt/hue-portal
 fi
 
 if [ -z "$MASTER" ]; then

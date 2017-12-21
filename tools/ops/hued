@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 #
-# /etc/rc.d/init.d/hued
+# /etc/rc.d/init.d/hue-portald
 #
 # chkconfig: 2345 99 15
 # description: Hue Server & UI
 
 . /etc/rc.d/init.d/functions
 . /etc/profile # make sure we are using the intended python
-PROJECT_HOME=/opt/hue
+PROJECT_HOME=/opt/hue-portal
 SUPERVISORD=`which supervisord`
 
 function fail {
-    logger -p error -t hued -i -- $1
+    logger -p error -t hue-portald -i -- $1
     echo "error: $2"
     exit 1
 }
@@ -23,11 +23,11 @@ function do_start {
 
 function do_stop {
     pkill -f "$PROJECT_HOME/tools/ops/supervisord.conf" && echo "Stopped supervisord, waiting for Python server to exit..."
-    HUE_PID=`pgrep -f "/opt/hue/build/env/bin/hue" 2>/dev/null`
+    HUE_PID=`pgrep -f "/opt/hue-portal/build/env/bin/hue" 2>/dev/null`
     until [ -z "$HUE_PID" ]; do
         echo "HUE_PID=$HUE_PID, Waiting..."
         sleep 2
-        HUE_PID=`pgrep -f "/opt/hue/build/env/bin/hue" 2>/dev/null`
+        HUE_PID=`pgrep -f "/opt/hue-portal/build/env/bin/hue" 2>/dev/null`
     done
     echo "Hue was successfully stopped."
 }
@@ -38,7 +38,7 @@ function do_restart {
 }
 
 function get_status {
-    HUE_PID=`pgrep -f /opt/hue/build/env/bin/hue 2>/dev/null`
+    HUE_PID=`pgrep -f /opt/hue-portal/build/env/bin/hue 2>/dev/null`
     if [ -z "$HUE_PID" ]; then
        echo "stopped"
        return 3
