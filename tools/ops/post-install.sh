@@ -2,7 +2,7 @@
 
 set -o errexit
 
-cp /opt/hue-portal/tools/ops/hued /etc/init.d/
+cp /opt/hue-portal/tools/ops/hue-portald /etc/init.d/
 
 chkconfig --add hue-portald
 
