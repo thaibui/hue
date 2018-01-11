@@ -42,16 +42,16 @@
   time_zone=GMT
 
   # Enable or disable Django debug mode.
-  ## django_debug_mode=true
+  django_debug_mode=false
 
   # Enable or disable database debug mode.
   ## database_logging=false
 
   # Whether to send debug messages from JavaScript to the server logs.
-  send_dbug_messages=true
+  send_dbug_messages=false
 
   # Enable or disable backtrace for server error
-  ## http_500_debug_mode=true
+  http_500_debug_mode=false
 
   # Enable or disable memory profiling.
   ## memory_profiler=false
@@ -83,10 +83,10 @@
   ## sasl_max_buffer=2 * 1024 * 1024
 
   # Filename of SSL Certificate
-  ## ssl_certificate=
+  ssl_certificate=/opt/hue-portal/desktop/conf/https.cert
 
   # Filename of SSL RSA Private Key
-  ## ssl_private_key=
+  ssl_private_key=/opt/hue-portal/desktop/conf/https.key
 
   # Filename of SSL Certificate Chain
   ## ssl_certificate_chain=
@@ -1267,7 +1267,7 @@
   ## home_dir_permissions=0755
 
   # The name of the default user group that users will be a member of
-  ## default_user_group=default
+  default_user_group=everyone
 
   [[password_policy]]
     # Set password policy to all users. The default policy requires password to be at least 8 characters long,
