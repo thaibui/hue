@@ -330,9 +330,7 @@ from metadata.conf import has_optimizer, OPTIMIZER
           'visibility': 'visible'
         });
 
-        $(".main-page").css({
-          'display': 'block'
-        });
+        $(".main-page").removeAttr("style");
       }
 
       window.addEventListener('message', function(event) {
