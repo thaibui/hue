@@ -113,6 +113,12 @@ if [ "$ENABLE_PORTAL" = true ]; then
     NGINX_LOCATION=/etc/nginx/sites-enabled
     unlink $NGINX_LOCATION/hue.conf || echo "No existing nginx config file found."
     ln -s $HUE_DIR/tools/ops/hue_nginx.conf $NGINX_LOCATION/hue.conf 
-    echo "Done creating NGINX rerouting policy. Restarting nginx..."
+    echo "Done creating NGINX rerouting policy."
+
+    echo "Creating Okta SSO proxy policy"
+    unlink $NGINX_LOCATION/okta-proxy.conf || echo "No existing okta proxy config file found."
+    ln -s $HUE_DIR/tools/ops/okta-proxy_nginx.conf $NGINX_LOCATION/okta-proxy.conf
+    echo "Done creating Okta SSO proxy policy."
+    echo "Restarting nginx..."
     service nginx restart
 fi
