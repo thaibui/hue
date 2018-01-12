@@ -120,7 +120,8 @@
 ${ hueIcons.symbols() }
 
 
-<div class="main-page">
+<div class="security-check">Security check, please wait ...</div>
+<div class="main-page" style="display:none">
   % if banner_message or conf.CUSTOM.BANNER_TOP_HTML.get():
     <div class="banner">
       ${ banner_message or conf.CUSTOM.BANNER_TOP_HTML.get() | n,unicode }
