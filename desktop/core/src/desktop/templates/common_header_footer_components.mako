@@ -318,11 +318,6 @@ from metadata.conf import has_optimizer, OPTIMIZER
       });
 
       window.addEventListener('message', function(event) {
-        if(event.data == 'qa-user-login') {
-          document.getElementById("id_username").value = 'qa-user';
-          document.getElementById("id_password").value = 'qa-user';
-          document.querySelector("div.login-container > form").submit();
-        }
       });
 
       // notify parent that the user has been logged in
