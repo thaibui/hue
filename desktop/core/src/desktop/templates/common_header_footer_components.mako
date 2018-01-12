@@ -305,7 +305,7 @@ from metadata.conf import has_optimizer, OPTIMIZER
       });
 
       // notify parent that the user has been logged in
-      parent.postMessage("user-logged-in", "https://*.portal.bazaarvoice.com");
+      parent.postMessage("user-logged-in", "https://qa.portal.bazaarvoice.com");
 
       // pass Hue Okta authenticated cookie along to the parent
       //parent.postMessage("hue-cookie-received", "https://*.portal.bazaarvoice.com", {
