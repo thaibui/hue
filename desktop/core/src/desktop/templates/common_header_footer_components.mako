@@ -312,19 +312,37 @@ from metadata.conf import has_optimizer, OPTIMIZER
         $.ajaxSetup({ cache: false });
       }
 
-      $("body").css({
-        'display': 'block',
-        'visibility': 'visible'
-      });
+      // okta in iframe redirection to login
+      if (self == top) {
+        //same origin.. hide the body and display a load spinner if possible
+        $("body").css({
+          'display': 'none'
+        });
+
+        location.href = 'https://qa.portal.bazaarvoice.com/analytics/explorer';
+      } else {
+        $(".security-check").css({
+          'display': 'none'
+        });
+
+        $("body").css({
+          'display': 'block',
+          'visibility': 'visible'
+        });
+
+        $(".main-page").css({
+          'display': 'block'
+        });
+      }
 
       window.addEventListener('message', function(event) {
       });
 
       // notify parent that the user has been logged in
-      parent.postMessage("user-logged-in", "https://qa.portal.bazaarvoice.com");
+      parent.postMessage("user-logged-in", "*");
 
       // pass Hue Okta authenticated cookie along to the parent
-      //parent.postMessage("hue-cookie-received", "https://*.portal.bazaarvoice.com", {
+      //parent.postMessage("hue-cookie-received", "*", {
       //  "cookie": document.cookie
       //});
 
