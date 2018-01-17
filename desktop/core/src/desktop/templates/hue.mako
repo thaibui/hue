@@ -133,6 +133,7 @@ ${ hueIcons.symbols() }
         <li><a href="/hue/editor?type=hive">Editor</a></li>
         <li><a href="/hue/home">Documents</a></li>
         <li><a href="/hue/metastore/tables">Tables</a></li>
+        <li><a href="https://bits.bazaarvoice.com/confluence/pages/viewpage.action?pageId=83472698" target="_blank">Getting Started</a></li>
       </ul>
     </div>
   </nav>
