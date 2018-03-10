@@ -303,7 +303,7 @@ from metadata.conf import has_optimizer, OPTIMIZER
           'display': 'none'
         });
 
-        location.href = 'https://qa.portal.bazaarvoice.com/analytics/explorer';
+        location.href = 'http://localhost:8080/analytics/explorer';
       } else {
         $(".security-check").css({
           'display': 'none'
