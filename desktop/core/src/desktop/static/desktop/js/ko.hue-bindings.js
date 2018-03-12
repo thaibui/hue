@@ -94,6 +94,8 @@
             } else if (event.ctrlKey || event.metaKey || event.which === 2) {
               window.open(prefix + url, '_blank');
             } else {
+              // notify parent that the user has been logged in
+              parent.postMessage({type: "url-clicked", data: {url: url, prefix: prefix}}, "*");
               huePubSub.publish('open.link', url);
             }
           }
