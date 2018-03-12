@@ -54,6 +54,21 @@
   <link href="${ static('desktop/css/jquery-ui.css') }" rel="stylesheet">
   <link href="${ static('desktop/css/home.css') }" rel="stylesheet">
 
+  <!-- Begin SessionStack code -->
+  <script type="text/javascript">
+  !function(a,b){var c=window;c.SessionStack=a,c[a]=c[a]||function(){
+  c[a].q=c[a].q||[],c[a].q.push(arguments)},c[a].t=b;var d=document.createElement("script");
+  d.async=1,d.src="https://cdn.sessionstack.com/sessionstack.js";
+  var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(d,e);
+  }("sessionstack", {
+     "token": "e373b55c6a5348c7ab4c328f6cff713d",
+     "isIframe": true
+  });
+  </script>
+  <!-- End SessionStack Code -->
+
+  ${ commonHeaderFooterComponents.header_i18n_redirection(user, is_s3_enabled, apps) }
+
   <script type="text/javascript">
     var IS_HUE_4 = true;
   </script>
