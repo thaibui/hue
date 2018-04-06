@@ -8,7 +8,7 @@
 . /etc/rc.d/init.d/functions
 . /etc/profile # make sure we are using the intended python
 PROJECT_HOME=/opt/hue
-SUPERVISORD=`which supervisord`
+SUPERVISORD=/usr/local/bin/supervisord
 
 function fail {
     logger -p error -t hued -i -- $1
