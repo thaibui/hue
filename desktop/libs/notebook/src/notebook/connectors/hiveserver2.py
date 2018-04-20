@@ -287,6 +287,14 @@ class HS2Api(Api):
 
     response['status'] = 'running' if status.index in (QueryHistory.STATE.running.index, QueryHistory.STATE.submitted.index) else 'available'
 
+    # when status is available, query is also finished
+    if response['status'] == 'available':
+      with mc_pool.reserve(True) as cache:
+        cache.delete(session_guid)
+        cache.delete(guid)
+        LOG.debug('check_status: Removed session_guid %s from busy session. Operation handle guid %s' % (session_guid, guid))
+
+
     return response
 
 
