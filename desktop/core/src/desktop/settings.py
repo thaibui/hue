@@ -179,6 +179,7 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = [
+    'longerusernameandemail',
     'django.contrib.auth',
     'django_openid_auth',
     'django.contrib.contenttypes',
