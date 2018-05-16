@@ -169,7 +169,7 @@
   # Comma separated list of apps to not load at server startup.
   # e.g.: pig,zookeeper
   #app_blacklist=jobbrowser,hbase,impala,pig,rdbms,search,security,spark,sqoop,zookeeper
-  app_blacklist=hbase,impala,pig,rdbms,search,security,spark,sqoop,zookeeper,librdbms,jobsub
+  app_blacklist=hbase,impala,pig,rdbms,search,security,spark,sqoop,zookeeper,librdbms,jobsub,filebrowser
 
   # Id of the cluster where Hue is located.
   ## cluster_id='default'
@@ -938,7 +938,8 @@
 
 [metastore]
   # Flag to turn on the new version of the create table wizard.
-  ## enable_new_create_table=true
+  # disabled for AR-1326
+  enable_new_create_table=false
 
 
 ###########################################################################
@@ -1302,7 +1303,8 @@
 [aws]
   [[aws_accounts]]
     # Default AWS account
-    ## [[[default]]]
+    [[[default]]
+      is_enabled=false
       # AWS credentials
       ## access_key_id=
       ## secret_access_key=
@@ -1316,7 +1318,8 @@
 
       # Allow to use either environment variables or
       # EC2 InstanceProfile to retrieve AWS credentials.
-      allow_environment_credentials=yes
+      # prevent accidentally pickup env credentials
+      allow_environment_credentials=false
 
       # AWS region to use, if no region is specified, will attempt to connect to standard s3.amazonaws.com endpoint
       ## region=us-east-1

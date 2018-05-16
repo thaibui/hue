@@ -170,14 +170,21 @@ AWS_ACCOUNTS = UnspecifiedConfigSection(
         key='is_secure',
         default=True,
         type=coerce_bool
+      ),
+      IS_ENABLED=Config(
+        key='is_enabled',
+        default=True,
+        type=coerce_bool
       )
     )
   )
 )
 
+def has_config():
+  return 'default' in AWS_ACCOUNTS.keys() and AWS_ACCOUNTS['default'].get_raw()
 
 def is_enabled():
-  return ('default' in AWS_ACCOUNTS.keys() and AWS_ACCOUNTS['default'].get_raw() and AWS_ACCOUNTS['default'].ACCESS_KEY_ID.get() is not None) or has_iam_metadata()
+  return (has_config() and AWS_ACCOUNTS['default'].ACCESS_KEY_ID.get() is not None) or (has_config() and AWS_ACCOUNTS['default'].IS_ENABLED.get() is True and has_iam_metadata())
 
 
 def has_iam_metadata():
